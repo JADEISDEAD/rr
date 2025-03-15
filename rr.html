@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Russian Roulette Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #2d2d2d;
+      color: white;
+    }
+    #fireButton {
+      background-color: #ff5733;
+      padding: 10px 20px;
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+      color: white;
+      border-radius: 10px;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 24px;
+    }
+    #chamberInfo {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Russian Roulette Game</h1>
+
+  <button id="fireButton">Fire!</button>
+
+  <div id="chamberInfo">
+    <p>Click the button to fire! (The bullet is hidden randomly in one of the chambers)</p>
+  </div>
+
+  <div id="result"></div>
+
+  <script>
+    let chambers = [0, 0, 0, 0, 0, 0]; // 0 for empty, 1 for bullet
+    let bulletPosition = Math.floor(Math.random() * 6); // Randomly place the bullet
+    let fired = false; // Track if the user has fired yet
+
+    // Function to reset the game
+    function resetGame() {
+      chambers = [0, 0, 0, 0, 0, 0];
+      bulletPosition = Math.floor(Math.random() * 6); // Random bullet placement
+      fired = false; // Reset the firing status
+      document.getElementById("result").innerText = '';
+      document.getElementById("fireButton").disabled = false; // Re-enable the fire button
+    }
+
+    // Function to handle the firing action
+    function fire() {
+      if (fired) {
+        return; // If the user already fired, prevent firing again until reset
+      }
+      
+      fired = true; // Mark as fired
+
+      let randomChamber = Math.floor(Math.random() * 6);
+      if (randomChamber === bulletPosition) {
+        document.getElementById("result").innerText = "bang! You lose fucko.";
+        document.getElementById("fireButton").disabled = true; // Disable button after firing
+        
+        // Wait 2 seconds after the loss and then redirect
+        setTimeout(() => {
+          window.location.href = "https://www.scientology.org/"; // Replace with your desired URL
+        }, 2000); // Redirect after 2000 milliseconds (2 seconds)
+        
+      } else {
+        document.getElementById("result").innerText = "Click again! You survived.";
+      }
+
+      // Automatically reset the game after 3 seconds
+      setTimeout(() => {
+        resetGame();
+      }, 3000); // Reset after 3000 milliseconds (3 seconds)
+    }
+
+    // Add event listener to the fire button
+    document.getElementById("fireButton").addEventListener("click", () => {
+      fire();
+    });
+
+    // Initialize the game
+    resetGame();
+
+  </script>
+  
+</body>
+</html>
