@@ -63,60 +63,57 @@
 	  "https://www.youtube.com/watch?v=MMlQfjMeVCo"
     ];
 
-    // Function to reset the game
+
     function resetGame() {
       chambers = [0, 0, 0, 0, 0, 0];
       bulletPosition = Math.floor(Math.random() * 6); 
-      fired = false; // Reset the firing status
+      fired = false; 
       document.getElementById("result").innerText = '';
       document.getElementById("fireButton").disabled = false; 
     }
 
-    // Function to update the survival count
+  
     function updateSurvivalCount() {
       document.getElementById("survivalCount").innerText = `Survival Count: ${survivalCount}`;
     }
 
-    // Function to handle the firing action
     function fire() {
       if (fired) {
-        return; // If the user already fired, prevent firing again until reset
+        return; 
       }
       
-      fired = true; // Mark as fired
+      fired = true;
 
       let randomChamber = Math.floor(Math.random() * 6);
       if (randomChamber === bulletPosition) {
-        document.getElementById("result").innerText = "Boom! You lose.";
-        document.getElementById("fireButton").disabled = true; // Disable button after firing
+        document.getElementById("result").innerText = "Bang! You lose.";
+        document.getElementById("fireButton").disabled = true; 
         
-        // Wait 2 seconds after the loss and then redirect to a random URL
+       
         setTimeout(() => {
-          let randomUrl = redirectUrls[Math.floor(Math.random() * redirectUrls.length)]; // Select a random URL
-          window.location.href = randomUrl; // Redirect to the random URL
-        }, 2000); // Redirect after 2000 milliseconds (2 seconds)
-        
-        // Reset the survival count when the player loses
+          let randomUrl = redirectUrls[Math.floor(Math.random() * redirectUrls.length)]; 
+          window.location.href = randomUrl; 
+        }, 2000); 
+
         survivalCount = 0;
-        updateSurvivalCount(); // Update the displayed survival count
+        updateSurvivalCount(); 
       } else {
         document.getElementById("result").innerText = "Click again! You survived.";
-        survivalCount++; // Increment the survival count if the player survives
-        updateSurvivalCount(); // Update the displayed survival count
+        survivalCount++; 
+        updateSurvivalCount(); 
       }
 
-      // Automatically reset the game after 3 seconds
       setTimeout(() => {
         resetGame();
-      }, 3000); // Reset after 3000 milliseconds (3 seconds)
+      }, 3000); 
     }
 
-    // Add event listener to the fire button
+   
     document.getElementById("fireButton").addEventListener("click", () => {
       fire();
     });
 
-    // Initialize the game
+   
     resetGame();
 
   </script>
