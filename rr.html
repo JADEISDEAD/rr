@@ -33,11 +33,30 @@
       font-size: 20px;
       margin-top: 30px;
     }
+	
+        .custom-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .custom-button img {
+            width: 40px;
+            height: 40px;
+        }
+        .custom-button img:hover {
+            opacity: 0.8;
+        }
   </style>
 </head>
 <body>
+<a href="https://jadeisdead.github.io/jadeisdead1/jadeisdead.html" target="_blank" class="custom-button">
+        <img src="https://media.tenor.com/yso9Ncqwm5UAAAAi/click-subscribe.gif" alt="Custom Button">
+    </a>
 
-  <h1>Russian Roulette </h1>
+  <h1>Russian Roulette</h1>
 
   <button id="fireButton">Fire!</button>
 
@@ -55,14 +74,12 @@
     let fired = false; 
     let survivalCount = 0; 
 
-  
     const redirectUrls = [
        "https://www.scientology.org/", 
       "https://www.usdebtclock.org/",
       "http://www.insecam.org/en/view/871898/",
 	  "https://www.youtube.com/watch?v=MMlQfjMeVCo"
     ];
-
 
     function resetGame() {
       chambers = [0, 0, 0, 0, 0, 0];
@@ -72,7 +89,6 @@
       document.getElementById("fireButton").disabled = false; 
     }
 
-  
     function updateSurvivalCount() {
       document.getElementById("survivalCount").innerText = `Survival Count: ${survivalCount}`;
     }
@@ -82,19 +98,19 @@
         return; 
       }
       
-      fired = true;
+      fired = true; 
 
       let randomChamber = Math.floor(Math.random() * 6);
       if (randomChamber === bulletPosition) {
         document.getElementById("result").innerText = "Bang! You lose fucko.";
-        document.getElementById("fireButton").disabled = true; 
-        
-       
+        document.getElementById("fireButton").disabled = true;
+    
         setTimeout(() => {
           let randomUrl = redirectUrls[Math.floor(Math.random() * redirectUrls.length)]; 
           window.location.href = randomUrl; 
         }, 2000); 
-
+        
+       
         survivalCount = 0;
         updateSurvivalCount(); 
       } else {
@@ -103,17 +119,16 @@
         updateSurvivalCount(); 
       }
 
+     
       setTimeout(() => {
         resetGame();
       }, 3000); 
     }
 
-   
     document.getElementById("fireButton").addEventListener("click", () => {
       fire();
     });
 
-   
     resetGame();
 
   </script>
