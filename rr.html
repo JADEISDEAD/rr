@@ -44,61 +44,57 @@
   <div id="result"></div>
 
   <script>
-    let chambers = [0, 0, 0, 0, 0, 0]; // 0 for empty, 1 for bullet
-    let bulletPosition = Math.floor(Math.random() * 6); // Randomly place the bullet
-    let fired = false; // Track if the user has fired yet
+    let chambers = [0, 0, 0, 0, 0, 0]; 
+    let bulletPosition = Math.floor(Math.random() * 6); 
+    let fired = false; 
 
-    // Array of URLs for random redirection
     const redirectUrls = [
-      "https://www.scientology.org/", // Replace with actual URLs
+      "https://www.scientology.org/", 
       "https://www.usdebtclock.org/",
       "http://www.insecam.org/en/view/871898/"
     ];
 
-    // Function to reset the game
+
     function resetGame() {
       chambers = [0, 0, 0, 0, 0, 0];
-      bulletPosition = Math.floor(Math.random() * 6); // Random bullet placement
+      bulletPosition = Math.floor(Math.random() * 6); 
       fired = false; // Reset the firing status
       document.getElementById("result").innerText = '';
-      document.getElementById("fireButton").disabled = false; // Re-enable the fire button
+      document.getElementById("fireButton").disabled = false; 
     }
 
-    // Function to handle the firing action
+  
     function fire() {
       if (fired) {
-        return; // If the user already fired, prevent firing again until reset
+        return; 
       }
       
-      fired = true; // Mark as fired
+      fired = true; 
 
       let randomChamber = Math.floor(Math.random() * 6);
       if (randomChamber === bulletPosition) {
         document.getElementById("result").innerText = "Boom! You lose.";
-        document.getElementById("fireButton").disabled = true; // Disable button after firing
+        document.getElementById("fireButton").disabled = true;
         
-        // Wait 2 seconds after the loss and then redirect to a random URL
+      
         setTimeout(() => {
-          let randomUrl = redirectUrls[Math.floor(Math.random() * redirectUrls.length)]; // Select a random URL
-          window.location.href = randomUrl; // Redirect to the random URL
-        }, 2000); // Redirect after 2000 milliseconds (2 seconds)
+          let randomUrl = redirectUrls[Math.floor(Math.random() * redirectUrls.length)]; 
+          window.location.href = randomUrl; 
+        }, 2000); 
         
       } else {
         document.getElementById("result").innerText = "Click again! You survived.";
       }
 
-      // Automatically reset the game after 3 seconds
       setTimeout(() => {
         resetGame();
-      }, 3000); // Reset after 3000 milliseconds (3 seconds)
+      }, 3000); 
     }
 
-    // Add event listener to the fire button
     document.getElementById("fireButton").addEventListener("click", () => {
       fire();
     });
 
-    // Initialize the game
     resetGame();
 
   </script>
