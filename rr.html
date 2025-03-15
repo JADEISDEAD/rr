@@ -48,6 +48,13 @@
     let bulletPosition = Math.floor(Math.random() * 6); // Randomly place the bullet
     let fired = false; // Track if the user has fired yet
 
+    // Array of URLs for random redirection
+    const redirectUrls = [
+      "https://www.scientology.org/", // Replace with actual URLs
+      "https://www.usdebtclock.org/",
+      "http://www.insecam.org/en/view/871898/"
+    ];
+
     // Function to reset the game
     function resetGame() {
       chambers = [0, 0, 0, 0, 0, 0];
@@ -67,12 +74,13 @@
 
       let randomChamber = Math.floor(Math.random() * 6);
       if (randomChamber === bulletPosition) {
-        document.getElementById("result").innerText = "bang! You lose fucko.";
+        document.getElementById("result").innerText = "Boom! You lose.";
         document.getElementById("fireButton").disabled = true; // Disable button after firing
         
-        // Wait 2 seconds after the loss and then redirect
+        // Wait 2 seconds after the loss and then redirect to a random URL
         setTimeout(() => {
-          window.location.href = "https://www.scientology.org/"; // Replace with your desired URL
+          let randomUrl = redirectUrls[Math.floor(Math.random() * redirectUrls.length)]; // Select a random URL
+          window.location.href = randomUrl; // Redirect to the random URL
         }, 2000); // Redirect after 2000 milliseconds (2 seconds)
         
       } else {
